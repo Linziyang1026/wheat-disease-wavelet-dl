@@ -3,6 +3,15 @@ import shutil
 
 
 def organize_files_by_extension(directory):
+    """
+        将原始zzy_wheat数据集整理成jpg,json,txt文件夹
+
+        Args:
+            directory_to_organize：被整理的文件夹路径
+
+        Returns:
+            tuple: 最佳的小波基名称和分解层次
+        """
     # 遍历给定目录中的所有文件和文件夹
     for filename in os.listdir(directory):
         # 获取文件的完整路径
@@ -25,5 +34,5 @@ def organize_files_by_extension(directory):
 
 
 # 使用示例
-directory_to_organize = "D:\workspace\data\zzy_wheat"  # 替换为你要整理的文件夹路径
+directory_to_organize = "D:\workspace\data\zzy_wheat"  # 被整理的文件夹路径
 organize_files_by_extension(directory_to_organize)
