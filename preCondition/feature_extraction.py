@@ -1,72 +1,94 @@
-import os
 from PIL import Image
+import os
 import numpy as np
 import torch
 from torch import nn
 from torchvision import models, transforms
-import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+import matplotlib.pyplot as plt
 
 
 class FeatureExtractor:
     def __init__(self):
-        # 加载预训练的ResNet模型，并移除最后一层全连接层
         self.model = models.resnet50(pretrained=True)
         self.model = nn.Sequential(*list(self.model.children())[:-1])  # 移除最后一层
         self.model.eval()
 
-        # 图像预处理
+        # 修改后的预处理步骤，适应单通道灰度图像
         self.preprocess = transforms.Compose([
-            transforms.Resize((224, 224)),  # 统一调整大小到224x224
+            transforms.Resize((224, 224)),
+            transforms.Grayscale(num_output_channels=3),  # 将灰度图像转换为3通道灰度图像
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ])
 
+
     def extract_features(self, image_path):
-        """
-        提取单张图像的特征向量。
-        """
-        img = Image.open(image_path).convert('RGB')  # 确保图像为RGB格式
-        img_tensor = self.preprocess(img)
-        img_tensor = img_tensor.unsqueeze(0)  # 增加batch维度
+            img = Image.open(image_path).convert('RGB')
+            img_tensor = self.preprocess(img)
+            img_tensor = img_tensor.unsqueeze(0)  # 增加batch维度
 
-        with torch.no_grad():
-            feature = self.model(img_tensor)
+            with torch.no_grad():
+                feature = self.model(img_tensor)
 
-        return feature.squeeze().numpy()
+            return feature.squeeze().numpy()
 
 
 def determine_optimal_k(features, max_k=10):
-    """
-    使用肘部法决定最佳的k值。
-    """
     sse = []
-    for k in range(1, max_k + 1):
-        kmeans = KMeans(n_clusters=k, random_state=0).fit(features)
+    silhouette_scores = []
+
+    for k in range(2, max_k + 1):  # 从2开始是因为当k=1时无法计算轮廓系数
+        kmeans = KMeans(n_clusters=k)
+        preds = kmeans.fit_predict(features)
+
+        # 计算SSE
         sse.append(kmeans.inertia_)
 
-    # 绘制肘部曲线
-    plt.figure(figsize=(10, 6))
-    plt.plot(range(1, max_k + 1), sse, 'bx-')
-    plt.xlabel('簇的数量 (k)')
+        # 计算轮廓系数
+        score = silhouette_score(features, preds)
+        silhouette_scores.append(score)
+
+        print(f'For k={k}, SSE: {kmeans.inertia_:.2f}, Silhouette Score: {score:.3f}')
+
+    # 找出具有最高轮廓系数的k值
+    optimal_k = silhouette_scores.index(max(silhouette_scores)) + 2  # 因为k是从2开始的
+
+    # 可视化结果
+    plt.figure(figsize=(14, 7))
+
+    # 绘制SSE图
+    plt.subplot(1, 2, 1)
+    plt.plot(range(2, max_k + 1), sse)
+    plt.title('Elbow Method')
+    plt.xlabel('Number of clusters')
     plt.ylabel('SSE')
-    plt.title('肘部法显示的最佳k值')
+
+    # 绘制轮廓系数图
+    plt.subplot(1, 2, 2)
+    plt.plot(range(2, max_k + 1), silhouette_scores)
+    plt.title('Silhouette Score Method')
+    plt.xlabel('Number of clusters')
+    plt.ylabel('Silhouette Score')
+
+    plt.tight_layout()
     plt.show()
+
+    return optimal_k
 
 
 def find_representative_samples(grayscale_dir, num_clusters=5):
-    """
-    使用K-means聚类找到数据集中的代表性样本。
-    """
     extractor = FeatureExtractor()
-
     all_images = [os.path.join(grayscale_dir, f) for f in os.listdir(grayscale_dir) if
                   f.endswith('.jpg') or f.endswith('.png')]
-    features = [extractor.extract_features(img).flatten() for img in all_images]
+    features = [extractor.extract_features(img) for img in all_images]
 
-    from sklearn.cluster import KMeans
+    # 自动确定最佳k值
+    num_clusters = determine_optimal_k(features)
+    print(f"Automatically determined optimal number of clusters: {num_clusters}")
+
     kmeans = KMeans(n_clusters=num_clusters, random_state=0).fit(features)
-
     representative_samples = []
     for i in range(num_clusters):
         cluster_indices = np.where(kmeans.labels_ == i)[0]

@@ -1,32 +1,58 @@
 import pywt
-from PIL import Image
+from PIL import Image  # 使用新版Pillow中的Resampling
 from skimage.metrics import peak_signal_noise_ratio as psnr, mean_squared_error as mse
 import numpy as np
-import feature_extraction
+
+def adjust_image_size(sample_path):
+    """
+    调整图像大小以确保宽度和高度都是偶数。
+    """
+    img = Image.open(sample_path)
+    width, height = img.size
+    new_width = ((width + 1) // 2) * 2  # 确保宽度是偶数
+    new_height = ((height + 1) // 2) * 2  # 确保高度是偶数
+    if width != new_width or height != new_height:
+        try:
+            # 调整图像尺寸
+            img = img.resize((new_width, new_height), resample=1)
+        except Exception as e:
+            print(f"Failed to process image {sample_path} due to {e}")
+        img.save(sample_path)
 
 def evaluate_wavelet(image, wavelet, level):
     """
-    对给定的小波基和分解层次进行评估。
+    对给定的小波基和分解层数评估小波变换性能。
     """
+    # 检查图像数据类型和值范围
+    if image.dtype != np.float64:
+        print(f"Warning: Image data type is {image.dtype}, expected np.float64")
+    if not (0 <= image.min() and image.max() <= 1):
+        print(f"Warning: Image value range is [{image.min():.4f}, {image.max():.4f}], expected [0, 1]")
+
     coeffs = pywt.wavedec2(image, wavelet, level=level)
-    # 进行阈值处理（这里我们简单地保留系数）
     coeffs_thresholded = [coeffs[0]] + [tuple(pywt.threshold(j, 0.1) for j in c) for c in coeffs[1:]]
     reconstructed_image = pywt.waverec2(coeffs_thresholded, wavelet)
 
-    # 确保重建图像的尺寸与原图相同
+    # 如果形状不匹配，则裁剪或填充
     if reconstructed_image.shape != image.shape:
-        reconstructed_image = reconstructed_image[:image.shape[0], :image.shape[1]]
+        print(f"Warning: Shape mismatch between original and reconstructed images: {image.shape} vs {reconstructed_image.shape}")
+        if reconstructed_image.shape[0] > image.shape[0] or reconstructed_image.shape[1] > image.shape[1]:
+            # 裁剪
+            reconstructed_image = reconstructed_image[:image.shape[0], :image.shape[1]]
+        else:
+            # 填充（如果需要）
+            pad_height = image.shape[0] - reconstructed_image.shape[0]
+            pad_width = image.shape[1] - reconstructed_image.shape[1]
+            reconstructed_image = np.pad(reconstructed_image,
+                                         ((0, pad_height), (0, pad_width)),
+                                         mode='constant', constant_values=0)
 
     error = mse(image, reconstructed_image)
     quality = psnr(image, reconstructed_image)
 
     return error, quality
 
-
 def find_best_wavelet(image, wavelets=('haar', 'db1', 'db2', 'coif1', 'sym2'), max_level=3):
-    """
-    寻找最优的小波基和分解层次。
-    """
     best_wavelet = None
     best_level = 0
     best_quality = -float('inf')
@@ -46,19 +72,16 @@ def find_best_wavelet(image, wavelets=('haar', 'db1', 'db2', 'coif1', 'sym2'), m
     print(f"\nBest Wavelet: {best_wavelet}, Best Level: {best_level}, Best PSNR: {best_quality:.4f}")
     return best_wavelet, best_level
 
-
-def optimize_wavelet_for_representatives(grayscale_dir, num_clusters=5):
-    """
-    在代表性样本上优化小波变换参数。
-    """
-    extractor = FeatureExtractor()
-    representative_samples = find_representative_samples(grayscale_dir, num_clusters=num_clusters)
-
+def optimize_wavelet_for_representatives(representative_samples):
     results = {}
     for sample_path in representative_samples:
-        img = Image.open(sample_path).convert('L')  # 转为灰度图像
-        img_array = np.array(img, dtype=np.float64) / 255.0  # 归一化
+        adjust_image_size(sample_path)
+
+        img = Image.open(sample_path).convert('L')
+        img_array = np.array(img, dtype=np.float64) / 255.0
         best_wavelet, best_level = find_best_wavelet(img_array)
         results[sample_path] = {'best_wavelet': best_wavelet, 'best_level': best_level}
+
+        print(f"For image {sample_path}, Best Wavelet is {best_wavelet} with level {best_level}")
 
     return results
