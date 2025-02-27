@@ -1,5 +1,5 @@
 import os
-from preprocess import process_images
+from preprocess import process_images  # 确保这是正确的预处理模块导入
 from feature_extraction import FeatureExtractor, find_representative_samples
 from optimize_wavelet import optimize_wavelet_for_representatives
 from wavelet_transform import process_images_with_optimized_wavelets
@@ -42,6 +42,7 @@ def main():
     # 使用找到的最佳小波基及其尺度对整个数据集进行处理
     process_images_with_optimized_wavelets(all_images, grayscale_dir, processed_output_dir, subbands_output_dir,
                                            best_wavelet_results)
+
 
 if __name__ == "__main__":
     main()
