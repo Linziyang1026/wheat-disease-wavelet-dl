@@ -2,6 +2,7 @@ import pywt
 from PIL import Image  # 使用新版Pillow中的Resampling
 from skimage.metrics import peak_signal_noise_ratio as psnr, mean_squared_error as mse
 import numpy as np
+from collections import Counter
 
 def adjust_image_size(sample_path):
     """
@@ -23,35 +24,27 @@ def evaluate_wavelet(image, wavelet, level):
     """
     对给定的小波基和分解层数评估小波变换性能。
     """
-    # 检查图像数据类型和值范围
-    if image.dtype != np.float64:
-        print(f"Warning: Image data type is {image.dtype}, expected np.float64")
-    if not (0 <= image.min() and image.max() <= 1):
-        print(f"Warning: Image value range is [{image.min():.4f}, {image.max():.4f}], expected [0, 1]")
-
+    original_shape = image.shape  # 记录原始尺寸
     coeffs = pywt.wavedec2(image, wavelet, level=level)
     coeffs_thresholded = [coeffs[0]] + [tuple(pywt.threshold(j, 0.1) for j in c) for c in coeffs[1:]]
     reconstructed_image = pywt.waverec2(coeffs_thresholded, wavelet)
 
-    # 如果形状不匹配，则裁剪或填充
-    if reconstructed_image.shape != image.shape:
-        print(f"Warning: Shape mismatch between original and reconstructed images: {image.shape} vs {reconstructed_image.shape}")
-        if reconstructed_image.shape[0] > image.shape[0] or reconstructed_image.shape[1] > image.shape[1]:
-            # 裁剪
-            reconstructed_image = reconstructed_image[:image.shape[0], :image.shape[1]]
-        else:
-            # 填充（如果需要）
-            pad_height = image.shape[0] - reconstructed_image.shape[0]
-            pad_width = image.shape[1] - reconstructed_image.shape[1]
-            reconstructed_image = np.pad(reconstructed_image,
-                                         ((0, pad_height), (0, pad_width)),
-                                         mode='constant', constant_values=0)
+    # 确保重构后的图像与原始图像尺寸相同
+    if reconstructed_image.shape[0] > original_shape[0] or reconstructed_image.shape[1] > original_shape[1]:
+        # 裁剪以匹配原始尺寸
+        reconstructed_image = reconstructed_image[:original_shape[0], :original_shape[1]]
+    else:
+        # 填充以匹配原始尺寸
+        pad_height = original_shape[0] - reconstructed_image.shape[0]
+        pad_width = original_shape[1] - reconstructed_image.shape[1]
+        reconstructed_image = np.pad(reconstructed_image,
+                                     ((0, pad_height), (0, pad_width)),
+                                     mode='constant', constant_values=0)
 
     error = mse(image, reconstructed_image)
     quality = psnr(image, reconstructed_image)
 
     return error, quality
-
 def find_best_wavelet(image, wavelets=('haar', 'db1', 'db2', 'coif1', 'sym2'), max_level=3):
     best_wavelet = None
     best_level = 0
@@ -72,16 +65,49 @@ def find_best_wavelet(image, wavelets=('haar', 'db1', 'db2', 'coif1', 'sym2'), m
     print(f"\nBest Wavelet: {best_wavelet}, Best Level: {best_level}, Best PSNR: {best_quality:.4f}")
     return best_wavelet, best_level
 
-def optimize_wavelet_for_representatives(representative_samples):
+
+def optimize_wavelet_for_dataset(image_paths, output_file):
     results = {}
-    for sample_path in representative_samples:
-        adjust_image_size(sample_path)
+    wavelet_counter = {}
+    level_counter = {}
 
-        img = Image.open(sample_path).convert('L')
-        img_array = np.array(img, dtype=np.float64) / 255.0
-        best_wavelet, best_level = find_best_wavelet(img_array)
-        results[sample_path] = {'best_wavelet': best_wavelet, 'best_level': best_level}
+    with open(output_file, 'w') as f:
+        for sample_path in image_paths:
+            try:
+                # 调整图像大小以确保宽度和高度都是偶数
+                img = Image.open(sample_path).convert('L')
+                img_array = np.array(img, dtype=np.float64) / 255.0
 
-        print(f"For image {sample_path}, Best Wavelet is {best_wavelet} with level {best_level}")
+                # 找到当前图像的最佳小波基和分解尺度
+                best_wavelet, best_level = find_best_wavelet(img_array)
 
-    return results
+                # 记录并打印每个图像的最佳配置
+                result_line = f"For image {sample_path}, Best Wavelet is {best_wavelet} with level {best_level}\n"
+                print(result_line.strip())
+                f.write(result_line)
+
+                # 统计每个小波基和分解尺度的使用次数
+                if best_wavelet not in wavelet_counter:
+                    wavelet_counter[best_wavelet] = 0
+                wavelet_counter[best_wavelet] += 1
+
+                if best_level not in level_counter:
+                    level_counter[best_level] = 0
+                level_counter[best_level] += 1
+
+                results[sample_path] = {'best_wavelet': best_wavelet, 'best_level': best_level}
+
+            except Exception as e:
+                error_line = f"Failed to process image {sample_path} due to {e}\n"
+                print(error_line.strip())
+                f.write(error_line)
+
+        # 确定整个数据集的最佳小波基和分解尺度
+        most_common_wavelet = Counter(wavelet_counter).most_common(1)[0]
+        most_common_level = Counter(level_counter).most_common(1)[0]
+
+        overall_result_line = f"\nOverall Best Wavelet: {most_common_wavelet[0]}, Level: {most_common_level[0]}\n"
+        print(overall_result_line.strip())
+        f.write(overall_result_line)
+
+    return results, most_common_wavelet[0], most_common_level[0]

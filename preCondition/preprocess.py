@@ -15,4 +15,3 @@ def process_images(input_dir, output_dir):
             img = Image.open(img_path).convert('L')
             output_path = os.path.join(output_dir, filename)
             img.save(output_path)
-            #print(f"Processed {filename} and saved to {output_path}")

@@ -1,7 +1,6 @@
 import os
 from preprocess import process_images  # 确保这是正确的预处理模块导入
-from feature_extraction import FeatureExtractor, find_representative_samples
-from optimize_wavelet import optimize_wavelet_for_representatives
+from optimize_wavelet import optimize_wavelet_for_dataset
 from wavelet_transform import process_images_with_optimized_wavelets
 
 def main():
@@ -25,23 +24,21 @@ def main():
     # 图像预处理：将彩色图像转换为灰度图像
     process_images(input_dir, grayscale_dir)
 
-    # 特征提取及确定最佳聚类数量
-    extractor = FeatureExtractor()
-    # 获取所有原始图像的路径
-    all_images = [os.path.join(input_dir, f) for f in os.listdir(input_dir) if
-                  f.endswith('.jpg') or f.endswith('.png')]
-    # 提取所有图像的特征
-    features = [extractor.extract_features(img) for img in all_images]
+    # 获取所有灰度图像的路径
+    all_gray_images = [os.path.join(grayscale_dir, f) for f in os.listdir(grayscale_dir) if
+                       f.endswith('.jpg') or f.endswith('.png')]
 
-    # 自动确定最佳聚类数量并找到代表性样本
-    representative_samples = find_representative_samples(all_images, features)
+    # 定义输出文件路径
+    output_file_dir = r"D:\workspace\data\wheat\results.txt"
 
-    # 在代表性样本上优化小波变换参数
-    best_wavelet_results = optimize_wavelet_for_representatives(representative_samples)
+    # 使用所有灰度图像来优化小波变换参数
+    best_wavelet_results, best_wavelet, best_level = optimize_wavelet_for_dataset(all_gray_images, output_file_dir)
+
+    print(f"Best Wavelet for the entire dataset: {best_wavelet}, Best Level: {best_level}")
 
     # 使用找到的最佳小波基及其尺度对整个数据集进行处理
-    process_images_with_optimized_wavelets(all_images, grayscale_dir, processed_output_dir, subbands_output_dir,
-                                           best_wavelet_results)
+    process_images_with_optimized_wavelets(all_gray_images, grayscale_dir, processed_output_dir, subbands_output_dir,
+                                           best_wavelet_results=best_wavelet_results)
 
 
 if __name__ == "__main__":
