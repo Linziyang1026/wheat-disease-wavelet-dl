@@ -10,7 +10,9 @@ def process_images(input_dir, output_dir):
         os.makedirs(output_dir)
 
     for filename in os.listdir(input_dir):
+
         if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.JPG'):
+
             img_path = os.path.join(input_dir, filename)
             img = Image.open(img_path).convert('L')
             output_path = os.path.join(output_dir, filename)

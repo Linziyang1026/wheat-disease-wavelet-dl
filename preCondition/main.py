@@ -8,6 +8,7 @@ def main():
     主函数，用于执行图像处理和特征提取的整个流程。
     """
     # 原始图像路径
+
     input_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\img"
     # 灰度图像输出路径
     grayscale_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\grayimg"
@@ -15,6 +16,7 @@ def main():
     processed_output_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\threshold_processed_images"
     # 输出子波段的目录
     subbands_output_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\subbands"
+
 
     # 创建输出目录
     os.makedirs(grayscale_dir, exist_ok=True)

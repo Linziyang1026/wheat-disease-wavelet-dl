@@ -80,6 +80,7 @@ def process_images_with_optimized_wavelets(image_paths, grayscale_dir, processed
         filename = os.path.basename(sample_image_path)
 
         if filename.endswith('.jpg') or filename.endswith('.png') or filename.endswith('.JPG'):
+
             sample_image = np.array(Image.open(os.path.join(grayscale_dir, filename)).convert('L'),
                                     dtype=np.float64) / 255.0
 
