@@ -9,13 +9,13 @@ def main():
     """
     # 原始图像路径
 
-    input_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\img"
+    input_dir = r"F:\wheat\wheatData"
     # 灰度图像输出路径
-    grayscale_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\grayimg"
+    grayscale_dir = r"F:\wheat\wheatData\grayimg"
     # 输出处理后的图像的目录
-    processed_output_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\threshold_processed_images"
+    processed_output_dir = r"F:\wheat\wheatData\threshold_processed_images"
     # 输出子波段的目录
-    subbands_output_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\subbands"
+    subbands_output_dir = r"F:\wheat\wheatData\subbands"
 
 
     # 创建输出目录

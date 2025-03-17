@@ -82,13 +82,13 @@ def copy_files_to_datasets(dataset, destination_folder):
 
 def main():
     subband_folder = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\subbands"  # 替换为你的子带图像文件夹的实际路径
-    label_folder = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\txt"  # 替换为你的标签文件夹的实际路径
+    label_folder = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\txt_01"  # 替换为你的标签文件夹的实际路径
 
     matched_files = match_subbands_with_labels(subband_folder, label_folder)
     train_set, val_set, test_set = split_dataset(matched_files)
 
     # 定义目标文件夹
-    output_base_dir = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\WaveletSubCNN\output"  # 替换为你希望保存划分后数据集的基础路径
+    output_base_dir = r"F:\wheat\output"  # 替换为你希望保存划分后数据集的基础路径
     os.makedirs(output_base_dir, exist_ok=True)
 
     # 复制文件到相应的数据集文件夹

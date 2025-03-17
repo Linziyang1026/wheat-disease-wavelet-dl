@@ -12,7 +12,7 @@ class WheatDiseaseDataset(Dataset):
             if filename.endswith('.txt'):
                 with open(os.path.join(label_dir, filename), 'r') as f:
                     label = int(f.readline().split()[0])
-                    if not (0 <= label < 12):  # 检查标签是否在有效范围内
+                    if not (0 <= label < 2):  # 检查标签是否在有效范围内
                         raise ValueError(f"Label {label} out of range in file {filename}")
                     img_name_base = filename.replace('.txt', '')
                     imgs = []
