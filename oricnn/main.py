@@ -10,13 +10,24 @@ from train_val_test import train_model, test_model
 # 设置设备
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-# 定义路径
+
+'''
+# 定义路径(原始二值图像）
 train_img_dir = r"F:\wheat\output_original\train\images"
 train_label_dir = r"F:\wheat\output_original\train\labels"
 val_img_dir = r"F:\wheat\output_original\val\images"
 val_label_dir = r"F:\wheat\output_original\val\labels"
 test_img_dir = r"F:\wheat\output_original\test\images"
 test_label_dir = r"F:\wheat\output_original\test\labels"
+'''
+
+# 定义路径(小波降噪后图像）
+train_img_dir = r"F:\wheat\output_threshold_processed_images\train\images"
+train_label_dir = r"F:\wheat\output_threshold_processed_images\train\labels"
+val_img_dir = r"F:\wheat\output_threshold_processed_images\val\images"
+val_label_dir = r"F:\wheat\output_threshold_processed_images\val\labels"
+test_img_dir = r"F:\wheat\output_threshold_processed_images\test\images"
+test_label_dir = r"F:\wheat\output_threshold_processed_images\test\labels"
 
 
 def main(train_num):

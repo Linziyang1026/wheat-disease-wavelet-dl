@@ -1,16 +1,20 @@
+import os
+
 import torch
 import torch.optim as optim
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
+from model import WheatDiseaseClassifier  # 导入模型定义
 
-def train_model(model, criterion, optimizer, train_loader, val_loader, num_epochs=200, device='cpu', train_num=1):
-
+def train_model(model, criterion, optimizer, train_loader, val_loader, num_epochs=200, device='cpu', train_num=5):
     log_file = f'training_log_{train_num}.txt'
     with open(log_file, 'w') as file:
         file.write(f'Training Log #{train_num}\n')
 
     best_val_accuracy = 0.0
-    # 添加列表用于存储每轮的结果
+    patience = 20  # 增加耐心值
+    counter = 0  # 计数器
+
     train_losses = []
     train_accuracies = []
     val_losses = []
@@ -20,7 +24,6 @@ def train_model(model, criterion, optimizer, train_loader, val_loader, num_epoch
         print(f'Epoch {epoch+1}/{num_epochs}')
         print('-' * 10)
 
-        # 训练阶段
         model.train()
         running_loss = 0.0
         all_labels = []
@@ -44,17 +47,22 @@ def train_model(model, criterion, optimizer, train_loader, val_loader, num_epoch
         train_accuracies.append(epoch_acc)
         print(f'Train Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
 
-        # 验证阶段
         val_loss, val_acc = validate_model(model, criterion, val_loader, device)
         val_losses.append(val_loss)
         val_accuracies.append(val_acc)
         if val_acc > best_val_accuracy:
             best_val_accuracy = val_acc
             torch.save(model.state_dict(), 'best_model.pth')
+            counter = 0
+        else:
+            counter += 1
 
         print(f'Validation Loss: {val_loss:.4f} Acc: {val_acc:.4f}\n')
 
-    # 绘制曲线
+        if counter >= patience:
+            print(f'Early stopping at epoch {epoch+1}')
+            break
+
     plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, train_num)
 
 
@@ -63,7 +71,6 @@ def plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, trai
 
     plt.figure(figsize=(12, 4))
 
-    # 绘制Loss曲线
     plt.subplot(1, 2, 1)
     plt.plot(epochs, train_losses, 'bo-', label='Training Loss')
     plt.plot(epochs, val_losses, 'ro-', label='Validation Loss')
@@ -72,7 +79,6 @@ def plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, trai
     plt.ylabel('Loss')
     plt.legend()
 
-    # 绘制Accuracy曲线
     plt.subplot(1, 2, 2)
     plt.plot(epochs, train_accuracies, 'bo-', label='Training Accuracy')
     plt.plot(epochs, val_accuracies, 'ro-', label='Validation Accuracy')
@@ -86,6 +92,7 @@ def plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, trai
 
     plt.savefig(f'training_plot_{train_num}.png')
     plt.close()
+
 
 def validate_model(model, criterion, val_loader, device='cpu'):
     model.eval()
@@ -107,8 +114,12 @@ def validate_model(model, criterion, val_loader, device='cpu'):
     epoch_acc = accuracy_score(all_labels, all_preds)
     return epoch_loss, epoch_acc
 
+
 def test_model(model, test_loader, device='cpu'):
-    model.load_state_dict(torch.load('best_model.pth'))
+    if os.path.exists('best_model.pth'):
+        model.load_state_dict(torch.load('best_model.pth', map_location=device), strict=False)
+    else:
+        print("Warning: best_model.pth not found. Testing with the current model state.")
     model.eval()
     all_labels = []
     all_preds = []

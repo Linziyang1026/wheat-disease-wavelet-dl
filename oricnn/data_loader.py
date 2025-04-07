@@ -6,6 +6,9 @@ from torchvision import transforms
 
 
 class WheatDiseaseDataset(Dataset):
+
+    '''
+    #应用于初始二值图像的img&label匹配
     def __init__(self, img_dir, label_dir, transform=None):
         self.img_labels = []
         for filename in os.listdir(label_dir):
@@ -22,6 +25,35 @@ class WheatDiseaseDataset(Dataset):
                     found_image = False
                     for ext in possible_extensions:
                         img_path = os.path.join(img_dir, img_name_base + ext)
+                        if os.path.exists(img_path):
+                            self.img_labels.append((Image.open(img_path).convert("L"), label))  # 使用灰度模式加载原始图像
+                            found_image = True
+                            break
+
+                    if not found_image:
+                        print(f"No matching image found for label file {filename}")
+
+        self.transform = transform
+    '''
+
+    # 应用于小波降噪后的二值图像的img&label匹配
+    def __init__(self, img_dir, label_dir, transform=None):
+        self.img_labels = []
+        for filename in os.listdir(label_dir):
+            if filename.endswith('.txt'):
+                with open(os.path.join(label_dir, filename), 'r') as f:
+                    label = int(f.readline().split()[0])
+                    if not (0 <= label < 2):  # 检查标签是否在有效范围内
+                        raise ValueError(f"Label {label} out of range in file {filename}")
+
+                    img_name_base = os.path.splitext(filename)[0]  # 获取不带扩展名的文件名基部
+                    processed_img_name_base = f"processed_{img_name_base}"  # 构建处理后的图像文件名基部
+
+                    # 支持多种图像格式
+                    possible_extensions = ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png']
+                    found_image = False
+                    for ext in possible_extensions:
+                        img_path = os.path.join(img_dir, processed_img_name_base + ext)
                         if os.path.exists(img_path):
                             self.img_labels.append((Image.open(img_path).convert("L"), label))  # 使用灰度模式加载原始图像
                             found_image = True

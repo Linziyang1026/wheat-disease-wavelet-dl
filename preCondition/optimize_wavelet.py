@@ -1,4 +1,6 @@
 import pywt
+import os
+
 from PIL import Image  # 使用新版Pillow中的Resampling
 from skimage.metrics import peak_signal_noise_ratio as psnr, mean_squared_error as mse
 import numpy as np
@@ -111,3 +113,21 @@ def optimize_wavelet_for_dataset(image_paths, output_file):
         f.write(overall_result_line)
 
     return results, most_common_wavelet[0], most_common_level[0]
+
+
+def main():
+
+    image_dir = r"F:\wheat\wheatData"  # 原始rgb图像路径
+    output_file = r"F:\wheat\output_RGB\results.txt"  # 输出多尺度分解实验结果
+
+    # 获取图像路径列表
+    image_paths = [os.path.join(image_dir, f) for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.JPG'))]
+
+    # 对数据集进行小波变换参数优化
+    results, best_wavelet, best_level = optimize_wavelet_for_dataset(image_paths, output_file)
+
+    # 输出最佳小波基和分解层数
+    print(f"Best Wavelet for the entire dataset: {best_wavelet}, Best Level: {best_level}")
+
+if __name__ == "__main__":
+    main()

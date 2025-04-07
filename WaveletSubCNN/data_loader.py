@@ -4,7 +4,6 @@ from torch.utils.data import Dataset
 import torch
 from torchvision import transforms
 
-
 class WheatDiseaseDataset(Dataset):
     def __init__(self, img_dir, label_dir, transform=None):
         self.img_labels = []
@@ -14,23 +13,30 @@ class WheatDiseaseDataset(Dataset):
                     label = int(f.readline().split()[0])
                     if not (0 <= label < 2):  # 检查标签是否在有效范围内
                         raise ValueError(f"Label {label} out of range in file {filename}")
-                    img_name_base = filename.replace('.txt', '')
-                    imgs = []
-                    for suffix in ['_approx.png', '_level1_d.png', '_level1_h.png', '_level1_v.png']:
-                        img_name = img_name_base + suffix
-                        img_path = os.path.join(img_dir, img_name)
+
+                    img_name_base = os.path.splitext(filename)[0]  # 获取不带扩展名的文件名基部
+                    img_name_processed = 'processed_' + img_name_base  # 添加前缀
+
+                    # 支持多种图像格式
+                    possible_extensions = ['.jpg', '.JPG', '.jpeg', '.JPEG', '.png']
+                    found_image = False
+                    for ext in possible_extensions:
+                        img_path = os.path.join(img_dir, img_name_processed + ext)
                         if os.path.exists(img_path):
-                            imgs.append(Image.open(img_path).convert("L"))  # 使用灰度模式加载图像
-                    if len(imgs) == 4:  # 确保所有子带都存在
-                        self.img_labels.append((imgs, label))
+                            self.img_labels.append((Image.open(img_path).convert("L"), label))  # 使用灰度模式加载原始图像
+                            found_image = True
+                            break
+
+                    if not found_image:
+                        print(f"No matching image found for label file {filename}. Searched for: {img_name_processed} with extensions {possible_extensions}")
+
         self.transform = transform
 
     def __getitem__(self, idx):
-        imgs, label = self.img_labels[idx]
-        # 将4个单通道图像合并为一个4通道图像
-        transformed_imgs = [self.transform(img) for img in imgs]
-        image = torch.cat(transformed_imgs, dim=0)  # 在通道维度上拼接
-        return image, torch.tensor(label, dtype=torch.long)
+        img, label = self.img_labels[idx]
+        if self.transform:
+            img = self.transform(img)  # 应用转换
+        return img, torch.tensor(label, dtype=torch.long)
 
     def __len__(self):
         return len(self.img_labels)
@@ -55,6 +61,7 @@ def get_data_loaders(train_img_dir, train_label_dir, val_img_dir, val_label_dir,
     val_dataset = WheatDiseaseDataset(val_img_dir, val_label_dir, transform=transform_val_test)
     test_dataset = WheatDiseaseDataset(test_img_dir, test_label_dir, transform=transform_val_test)
 
+    # 移除 drop_last=True 参数以使用所有数据
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
     test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
