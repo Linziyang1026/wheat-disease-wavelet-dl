@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/oricnn.iml" filepath="$PROJECT_DIR$/.idea/oricnn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CNNmodel.iml" filepath="$PROJECT_DIR$/.idea/CNNmodel.iml" />
     </modules>
   </component>
 </project>

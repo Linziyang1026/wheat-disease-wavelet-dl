@@ -1,16 +1,17 @@
+import os
+
 import torch
 import torch.optim as optim
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 
-def train_model(model, criterion, optimizer, train_loader, val_loader, num_epochs=200, device='cpu', train_num=1):
+def train_model(model, criterion, optimizer, train_loader, val_loader, num_epochs=200, device='gpu', train_num=1, save_dir=None):
 
-    log_file = f'training_log_{train_num}.txt'
+    log_file = os.path.join(save_dir, f'training_log_{train_num}.txt') if save_dir else f'training_log_{train_num}.txt'
     with open(log_file, 'w') as file:
         file.write(f'Training Log #{train_num}\n')
 
     best_val_accuracy = 0.0
-    # 添加列表用于存储每轮的结果
     train_losses = []
     train_accuracies = []
     val_losses = []
@@ -50,15 +51,15 @@ def train_model(model, criterion, optimizer, train_loader, val_loader, num_epoch
         val_accuracies.append(val_acc)
         if val_acc > best_val_accuracy:
             best_val_accuracy = val_acc
-            torch.save(model.state_dict(), 'best_model.pth')
+            torch.save(model.state_dict(), os.path.join(save_dir, 'best_model.pth') if save_dir else 'best_model.pth')
 
         print(f'Validation Loss: {val_loss:.4f} Acc: {val_acc:.4f}\n')
 
     # 绘制曲线
-    plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, train_num)
+    plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, train_num, save_dir=save_dir)
 
 
-def plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, train_num):
+def plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, train_num, save_dir=None):
     epochs = range(1, len(train_losses) + 1)
 
     plt.figure(figsize=(12, 4))
@@ -82,10 +83,16 @@ def plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, trai
     plt.legend()
 
     plt.tight_layout()
-    plt.show()
 
-    plt.savefig(f'training_plot_{train_num}.png')
-    plt.close()
+    # 保存图像到指定目录
+    if save_dir is not None:
+        file_name = f'training_plot_{train_num}.png'
+        full_path = os.path.join(save_dir, file_name)
+        plt.savefig(full_path)
+        print(f"Image saved to {full_path}")  # 打印保存路径以确认
+    else:
+        plt.savefig(f'training_plot_{train_num}.png')
+    plt.close()  # 关闭图像以释放内存
 
 def validate_model(model, criterion, val_loader, device='cpu'):
     model.eval()

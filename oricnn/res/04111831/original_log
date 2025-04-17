@@ -1,0 +1,1007 @@
+D:\development\tool\Anaconda\envs\wheat-disease-wavelet-dl\python.exe D:\workspace\pyspace\code\wheat-disease-wavelet-dl\oricnn\main.py
+Using default training number as no argument provided.
+Epoch 1/200
+----------
+Train Loss: 0.3676 Acc: 0.8916
+Validation Loss: 0.4636 Acc: 0.8864
+
+Epoch 2/200
+----------
+Train Loss: 0.2807 Acc: 0.9256
+Validation Loss: 0.3811 Acc: 0.8864
+
+Epoch 3/200
+----------
+Train Loss: 0.2646 Acc: 0.9256
+Validation Loss: 0.4186 Acc: 0.8864
+
+Epoch 4/200
+----------
+Train Loss: 0.2889 Acc: 0.9256
+Validation Loss: 0.3754 Acc: 0.8864
+
+Epoch 5/200
+----------
+Train Loss: 0.2667 Acc: 0.9256
+Validation Loss: 0.3608 Acc: 0.8864
+
+Epoch 6/200
+----------
+Train Loss: 0.2564 Acc: 0.9256
+Validation Loss: 0.4056 Acc: 0.8864
+
+Epoch 7/200
+----------
+Train Loss: 0.2680 Acc: 0.9256
+Validation Loss: 0.3492 Acc: 0.8864
+
+Epoch 8/200
+----------
+Train Loss: 0.2523 Acc: 0.9256
+Validation Loss: 0.3474 Acc: 0.8864
+
+Epoch 9/200
+----------
+Train Loss: 0.2564 Acc: 0.9256
+Validation Loss: 0.3558 Acc: 0.8864
+
+Epoch 10/200
+----------
+Train Loss: 0.2495 Acc: 0.9256
+Validation Loss: 0.4111 Acc: 0.8864
+
+Epoch 11/200
+----------
+Train Loss: 0.2558 Acc: 0.9256
+Validation Loss: 0.3451 Acc: 0.8864
+
+Epoch 12/200
+----------
+Train Loss: 0.2307 Acc: 0.9256
+Validation Loss: 0.3129 Acc: 0.8864
+
+Epoch 13/200
+----------
+Train Loss: 0.2393 Acc: 0.9256
+Validation Loss: 0.3076 Acc: 0.8864
+
+Epoch 14/200
+----------
+Train Loss: 0.2449 Acc: 0.9256
+Validation Loss: 0.3148 Acc: 0.8864
+
+Epoch 15/200
+----------
+Train Loss: 0.2237 Acc: 0.9256
+Validation Loss: 0.3218 Acc: 0.8864
+
+Epoch 16/200
+----------
+Train Loss: 0.2288 Acc: 0.9256
+Validation Loss: 0.3298 Acc: 0.8864
+
+Epoch 17/200
+----------
+Train Loss: 0.2444 Acc: 0.9256
+Validation Loss: 0.3278 Acc: 0.8864
+
+Epoch 18/200
+----------
+Train Loss: 0.2221 Acc: 0.9256
+Validation Loss: 0.2946 Acc: 0.8864
+
+Epoch 19/200
+----------
+Train Loss: 0.2127 Acc: 0.9256
+Validation Loss: 0.3072 Acc: 0.8864
+
+Epoch 20/200
+----------
+Train Loss: 0.2316 Acc: 0.9256
+Validation Loss: 0.3892 Acc: 0.8864
+
+Epoch 21/200
+----------
+Train Loss: 0.2106 Acc: 0.9256
+Validation Loss: 0.3324 Acc: 0.8864
+
+Epoch 22/200
+----------
+Train Loss: 0.2080 Acc: 0.9256
+Validation Loss: 0.3259 Acc: 0.8864
+
+Epoch 23/200
+----------
+Train Loss: 0.2077 Acc: 0.9256
+Validation Loss: 0.2874 Acc: 0.8864
+
+Epoch 24/200
+----------
+Train Loss: 0.1976 Acc: 0.9256
+Validation Loss: 0.2698 Acc: 0.8864
+
+Epoch 25/200
+----------
+Train Loss: 0.1930 Acc: 0.9256
+Validation Loss: 0.3032 Acc: 0.8864
+
+Epoch 26/200
+----------
+Train Loss: 0.1904 Acc: 0.9256
+Validation Loss: 0.2781 Acc: 0.8864
+
+Epoch 27/200
+----------
+Train Loss: 0.2025 Acc: 0.9272
+Validation Loss: 0.3502 Acc: 0.8864
+
+Epoch 28/200
+----------
+Train Loss: 0.2134 Acc: 0.9256
+Validation Loss: 0.2856 Acc: 0.8864
+
+Epoch 29/200
+----------
+Train Loss: 0.1882 Acc: 0.9256
+Validation Loss: 0.3600 Acc: 0.8864
+
+Epoch 30/200
+----------
+Train Loss: 0.1984 Acc: 0.9256
+Validation Loss: 0.3232 Acc: 0.8864
+
+Epoch 31/200
+----------
+Train Loss: 0.2040 Acc: 0.9256
+Validation Loss: 0.2935 Acc: 0.8864
+
+Epoch 32/200
+----------
+Train Loss: 0.1885 Acc: 0.9256
+Validation Loss: 0.3282 Acc: 0.8864
+
+Epoch 33/200
+----------
+Train Loss: 0.1828 Acc: 0.9256
+Validation Loss: 0.3936 Acc: 0.8864
+
+Epoch 34/200
+----------
+Train Loss: 0.1864 Acc: 0.9256
+Validation Loss: 0.3500 Acc: 0.8864
+
+Epoch 35/200
+----------
+Train Loss: 0.1796 Acc: 0.9272
+Validation Loss: 0.3109 Acc: 0.8864
+
+Epoch 36/200
+----------
+Train Loss: 0.1728 Acc: 0.9272
+Validation Loss: 0.3378 Acc: 0.8864
+
+Epoch 37/200
+----------
+Train Loss: 0.1822 Acc: 0.9272
+Validation Loss: 0.3448 Acc: 0.8864
+
+Epoch 38/200
+----------
+Train Loss: 0.1748 Acc: 0.9256
+Validation Loss: 0.3300 Acc: 0.8864
+
+Epoch 39/200
+----------
+Train Loss: 0.1618 Acc: 0.9272
+Validation Loss: 0.3482 Acc: 0.8864
+
+Epoch 40/200
+----------
+Train Loss: 0.1678 Acc: 0.9256
+Validation Loss: 0.3235 Acc: 0.8864
+
+Epoch 41/200
+----------
+Train Loss: 0.1780 Acc: 0.9239
+Validation Loss: 0.3121 Acc: 0.8864
+
+Epoch 42/200
+----------
+Train Loss: 0.1731 Acc: 0.9256
+Validation Loss: 0.3034 Acc: 0.8864
+
+Epoch 43/200
+----------
+Train Loss: 0.1781 Acc: 0.9256
+Validation Loss: 0.2940 Acc: 0.8939
+
+Epoch 44/200
+----------
+Train Loss: 0.1631 Acc: 0.9288
+Validation Loss: 0.3456 Acc: 0.8939
+
+Epoch 45/200
+----------
+Train Loss: 0.1664 Acc: 0.9304
+Validation Loss: 0.2926 Acc: 0.8939
+
+Epoch 46/200
+----------
+Train Loss: 0.1530 Acc: 0.9256
+Validation Loss: 0.4849 Acc: 0.8712
+
+Epoch 47/200
+----------
+Train Loss: 0.1862 Acc: 0.9304
+Validation Loss: 0.3280 Acc: 0.8864
+
+Epoch 48/200
+----------
+Train Loss: 0.1819 Acc: 0.9239
+Validation Loss: 0.3251 Acc: 0.8788
+
+Epoch 49/200
+----------
+Train Loss: 0.1721 Acc: 0.9320
+Validation Loss: 0.3318 Acc: 0.8864
+
+Epoch 50/200
+----------
+Train Loss: 0.1731 Acc: 0.9272
+Validation Loss: 0.3206 Acc: 0.9015
+
+Epoch 51/200
+----------
+Train Loss: 0.1587 Acc: 0.9256
+Validation Loss: 0.3657 Acc: 0.8864
+
+Epoch 52/200
+----------
+Train Loss: 0.1728 Acc: 0.9272
+Validation Loss: 0.4152 Acc: 0.8864
+
+Epoch 53/200
+----------
+Train Loss: 0.1536 Acc: 0.9353
+Validation Loss: 0.3552 Acc: 0.8939
+
+Epoch 54/200
+----------
+Train Loss: 0.1590 Acc: 0.9353
+Validation Loss: 0.3394 Acc: 0.8712
+
+Epoch 55/200
+----------
+Train Loss: 0.1785 Acc: 0.9417
+Validation Loss: 0.3678 Acc: 0.8939
+
+Epoch 56/200
+----------
+Train Loss: 0.1568 Acc: 0.9320
+Validation Loss: 0.3866 Acc: 0.8788
+
+Epoch 57/200
+----------
+Train Loss: 0.1690 Acc: 0.9320
+Validation Loss: 0.4376 Acc: 0.8788
+
+Epoch 58/200
+----------
+Train Loss: 0.1601 Acc: 0.9304
+Validation Loss: 0.4723 Acc: 0.8864
+
+Epoch 59/200
+----------
+Train Loss: 0.1350 Acc: 0.9385
+Validation Loss: 0.4701 Acc: 0.8939
+
+Epoch 60/200
+----------
+Train Loss: 0.1413 Acc: 0.9353
+Validation Loss: 0.4429 Acc: 0.8864
+
+Epoch 61/200
+----------
+Train Loss: 0.1488 Acc: 0.9337
+Validation Loss: 0.4533 Acc: 0.9015
+
+Epoch 62/200
+----------
+Train Loss: 0.1438 Acc: 0.9417
+Validation Loss: 0.3965 Acc: 0.9015
+
+Epoch 63/200
+----------
+Train Loss: 0.1547 Acc: 0.9369
+Validation Loss: 0.4068 Acc: 0.9015
+
+Epoch 64/200
+----------
+Train Loss: 0.1424 Acc: 0.9385
+Validation Loss: 0.3515 Acc: 0.8864
+
+Epoch 65/200
+----------
+Train Loss: 0.1571 Acc: 0.9417
+Validation Loss: 0.3804 Acc: 0.8939
+
+Epoch 66/200
+----------
+Train Loss: 0.1399 Acc: 0.9304
+Validation Loss: 0.4127 Acc: 0.8864
+
+Epoch 67/200
+----------
+Train Loss: 0.1466 Acc: 0.9466
+Validation Loss: 0.3272 Acc: 0.8939
+
+Epoch 68/200
+----------
+Train Loss: 0.1443 Acc: 0.9385
+Validation Loss: 0.4035 Acc: 0.8864
+
+Epoch 69/200
+----------
+Train Loss: 0.1418 Acc: 0.9417
+Validation Loss: 0.3901 Acc: 0.9015
+
+Epoch 70/200
+----------
+Train Loss: 0.1352 Acc: 0.9450
+Validation Loss: 0.3792 Acc: 0.8636
+
+Epoch 71/200
+----------
+Train Loss: 0.1338 Acc: 0.9401
+Validation Loss: 0.5008 Acc: 0.8788
+
+Epoch 72/200
+----------
+Train Loss: 0.1373 Acc: 0.9434
+Validation Loss: 0.5167 Acc: 0.8864
+
+Epoch 73/200
+----------
+Train Loss: 0.1195 Acc: 0.9515
+Validation Loss: 0.4558 Acc: 0.9015
+
+Epoch 74/200
+----------
+Train Loss: 0.1328 Acc: 0.9401
+Validation Loss: 0.5082 Acc: 0.8939
+
+Epoch 75/200
+----------
+Train Loss: 0.1403 Acc: 0.9385
+Validation Loss: 0.4666 Acc: 0.8864
+
+Epoch 76/200
+----------
+Train Loss: 0.1164 Acc: 0.9515
+Validation Loss: 0.4935 Acc: 0.8864
+
+Epoch 77/200
+----------
+Train Loss: 0.1335 Acc: 0.9434
+Validation Loss: 0.4719 Acc: 0.8939
+
+Epoch 78/200
+----------
+Train Loss: 0.1221 Acc: 0.9417
+Validation Loss: 0.4086 Acc: 0.8788
+
+Epoch 79/200
+----------
+Train Loss: 0.1333 Acc: 0.9385
+Validation Loss: 0.4060 Acc: 0.8939
+
+Epoch 80/200
+----------
+Train Loss: 0.1148 Acc: 0.9482
+Validation Loss: 0.4156 Acc: 0.8864
+
+Epoch 81/200
+----------
+Train Loss: 0.1171 Acc: 0.9498
+Validation Loss: 0.4329 Acc: 0.9091
+
+Epoch 82/200
+----------
+Train Loss: 0.1326 Acc: 0.9434
+Validation Loss: 0.3972 Acc: 0.8939
+
+Epoch 83/200
+----------
+Train Loss: 0.1296 Acc: 0.9466
+Validation Loss: 0.4543 Acc: 0.8864
+
+Epoch 84/200
+----------
+Train Loss: 0.1313 Acc: 0.9482
+Validation Loss: 0.3920 Acc: 0.8864
+
+Epoch 85/200
+----------
+Train Loss: 0.1167 Acc: 0.9498
+Validation Loss: 0.3948 Acc: 0.9167
+
+Epoch 86/200
+----------
+Train Loss: 0.1118 Acc: 0.9531
+Validation Loss: 0.4516 Acc: 0.8939
+
+Epoch 87/200
+----------
+Train Loss: 0.1316 Acc: 0.9515
+Validation Loss: 0.4116 Acc: 0.8712
+
+Epoch 88/200
+----------
+Train Loss: 0.1286 Acc: 0.9417
+Validation Loss: 0.3730 Acc: 0.8864
+
+Epoch 89/200
+----------
+Train Loss: 0.1245 Acc: 0.9498
+Validation Loss: 0.3808 Acc: 0.8864
+
+Epoch 90/200
+----------
+Train Loss: 0.1267 Acc: 0.9450
+Validation Loss: 0.4281 Acc: 0.8864
+
+Epoch 91/200
+----------
+Train Loss: 0.1122 Acc: 0.9547
+Validation Loss: 0.4473 Acc: 0.9015
+
+Epoch 92/200
+----------
+Train Loss: 0.1247 Acc: 0.9450
+Validation Loss: 0.4052 Acc: 0.8939
+
+Epoch 93/200
+----------
+Train Loss: 0.1142 Acc: 0.9450
+Validation Loss: 0.5186 Acc: 0.8788
+
+Epoch 94/200
+----------
+Train Loss: 0.1040 Acc: 0.9531
+Validation Loss: 0.4831 Acc: 0.8939
+
+Epoch 95/200
+----------
+Train Loss: 0.0986 Acc: 0.9595
+Validation Loss: 0.5028 Acc: 0.9015
+
+Epoch 96/200
+----------
+Train Loss: 0.1075 Acc: 0.9547
+Validation Loss: 0.4947 Acc: 0.8788
+
+Epoch 97/200
+----------
+Train Loss: 0.1060 Acc: 0.9612
+Validation Loss: 0.4559 Acc: 0.9015
+
+Epoch 98/200
+----------
+Train Loss: 0.1107 Acc: 0.9547
+Validation Loss: 0.4258 Acc: 0.8636
+
+Epoch 99/200
+----------
+Train Loss: 0.0923 Acc: 0.9660
+Validation Loss: 0.6209 Acc: 0.9015
+
+Epoch 100/200
+----------
+Train Loss: 0.1082 Acc: 0.9417
+Validation Loss: 0.4333 Acc: 0.8939
+
+Epoch 101/200
+----------
+Train Loss: 0.0983 Acc: 0.9563
+Validation Loss: 0.4237 Acc: 0.8864
+
+Epoch 102/200
+----------
+Train Loss: 0.1147 Acc: 0.9466
+Validation Loss: 0.4302 Acc: 0.8864
+
+Epoch 103/200
+----------
+Train Loss: 0.1274 Acc: 0.9466
+Validation Loss: 0.4322 Acc: 0.8636
+
+Epoch 104/200
+----------
+Train Loss: 0.1160 Acc: 0.9531
+Validation Loss: 0.4805 Acc: 0.8864
+
+Epoch 105/200
+----------
+Train Loss: 0.1242 Acc: 0.9337
+Validation Loss: 0.4905 Acc: 0.8864
+
+Epoch 106/200
+----------
+Train Loss: 0.1313 Acc: 0.9466
+Validation Loss: 0.4235 Acc: 0.8939
+
+Epoch 107/200
+----------
+Train Loss: 0.1074 Acc: 0.9498
+Validation Loss: 0.4294 Acc: 0.8712
+
+Epoch 108/200
+----------
+Train Loss: 0.1011 Acc: 0.9563
+Validation Loss: 0.4083 Acc: 0.8788
+
+Epoch 109/200
+----------
+Train Loss: 0.1172 Acc: 0.9434
+Validation Loss: 0.4550 Acc: 0.9015
+
+Epoch 110/200
+----------
+Train Loss: 0.0918 Acc: 0.9547
+Validation Loss: 0.4759 Acc: 0.8864
+
+Epoch 111/200
+----------
+Train Loss: 0.1095 Acc: 0.9579
+Validation Loss: 0.5761 Acc: 0.8864
+
+Epoch 112/200
+----------
+Train Loss: 0.1173 Acc: 0.9417
+Validation Loss: 0.5017 Acc: 0.8939
+
+Epoch 113/200
+----------
+Train Loss: 0.1286 Acc: 0.9385
+Validation Loss: 0.6423 Acc: 0.8939
+
+Epoch 114/200
+----------
+Train Loss: 0.1204 Acc: 0.9498
+Validation Loss: 0.4994 Acc: 0.8864
+
+Epoch 115/200
+----------
+Train Loss: 0.0997 Acc: 0.9563
+Validation Loss: 0.4833 Acc: 0.8939
+
+Epoch 116/200
+----------
+Train Loss: 0.0901 Acc: 0.9595
+Validation Loss: 0.4812 Acc: 0.8864
+
+Epoch 117/200
+----------
+Train Loss: 0.0751 Acc: 0.9693
+Validation Loss: 0.4723 Acc: 0.8788
+
+Epoch 118/200
+----------
+Train Loss: 0.0897 Acc: 0.9612
+Validation Loss: 0.6141 Acc: 0.9015
+
+Epoch 119/200
+----------
+Train Loss: 0.1005 Acc: 0.9515
+Validation Loss: 0.4942 Acc: 0.8939
+
+Epoch 120/200
+----------
+Train Loss: 0.1050 Acc: 0.9482
+Validation Loss: 0.4890 Acc: 0.9015
+
+Epoch 121/200
+----------
+Train Loss: 0.0959 Acc: 0.9612
+Validation Loss: 0.4961 Acc: 0.8788
+
+Epoch 122/200
+----------
+Train Loss: 0.0956 Acc: 0.9579
+Validation Loss: 0.4763 Acc: 0.8788
+
+Epoch 123/200
+----------
+Train Loss: 0.0996 Acc: 0.9579
+Validation Loss: 0.6069 Acc: 0.8788
+
+Epoch 124/200
+----------
+Train Loss: 0.0851 Acc: 0.9628
+Validation Loss: 0.5713 Acc: 0.9015
+
+Epoch 125/200
+----------
+Train Loss: 0.0942 Acc: 0.9676
+Validation Loss: 0.5724 Acc: 0.9015
+
+Epoch 126/200
+----------
+Train Loss: 0.0947 Acc: 0.9595
+Validation Loss: 0.5532 Acc: 0.8788
+
+Epoch 127/200
+----------
+Train Loss: 0.0821 Acc: 0.9628
+Validation Loss: 0.5141 Acc: 0.8939
+
+Epoch 128/200
+----------
+Train Loss: 0.0679 Acc: 0.9693
+Validation Loss: 0.5925 Acc: 0.8864
+
+Epoch 129/200
+----------
+Train Loss: 0.0732 Acc: 0.9757
+Validation Loss: 0.6107 Acc: 0.8939
+
+Epoch 130/200
+----------
+Train Loss: 0.1100 Acc: 0.9515
+Validation Loss: 0.5327 Acc: 0.8939
+
+Epoch 131/200
+----------
+Train Loss: 0.1005 Acc: 0.9531
+Validation Loss: 0.4391 Acc: 0.8939
+
+Epoch 132/200
+----------
+Train Loss: 0.1036 Acc: 0.9450
+Validation Loss: 0.4983 Acc: 0.8864
+
+Epoch 133/200
+----------
+Train Loss: 0.0746 Acc: 0.9676
+Validation Loss: 0.4969 Acc: 0.8788
+
+Epoch 134/200
+----------
+Train Loss: 0.0957 Acc: 0.9660
+Validation Loss: 0.5555 Acc: 0.8864
+
+Epoch 135/200
+----------
+Train Loss: 0.0883 Acc: 0.9628
+Validation Loss: 0.6201 Acc: 0.8712
+
+Epoch 136/200
+----------
+Train Loss: 0.0738 Acc: 0.9693
+Validation Loss: 0.5466 Acc: 0.8939
+
+Epoch 137/200
+----------
+Train Loss: 0.0775 Acc: 0.9676
+Validation Loss: 0.5785 Acc: 0.8939
+
+Epoch 138/200
+----------
+Train Loss: 0.0683 Acc: 0.9757
+Validation Loss: 0.5038 Acc: 0.8939
+
+Epoch 139/200
+----------
+Train Loss: 0.0895 Acc: 0.9579
+Validation Loss: 0.4725 Acc: 0.8864
+
+Epoch 140/200
+----------
+Train Loss: 0.0782 Acc: 0.9644
+Validation Loss: 0.5526 Acc: 0.8864
+
+Epoch 141/200
+----------
+Train Loss: 0.0689 Acc: 0.9741
+Validation Loss: 0.5797 Acc: 0.8864
+
+Epoch 142/200
+----------
+Train Loss: 0.0612 Acc: 0.9806
+Validation Loss: 0.5645 Acc: 0.8864
+
+Epoch 143/200
+----------
+Train Loss: 0.0673 Acc: 0.9709
+Validation Loss: 0.4750 Acc: 0.8939
+
+Epoch 144/200
+----------
+Train Loss: 0.0731 Acc: 0.9709
+Validation Loss: 0.6172 Acc: 0.9242
+
+Epoch 145/200
+----------
+Train Loss: 0.1121 Acc: 0.9579
+Validation Loss: 0.4756 Acc: 0.9015
+
+Epoch 146/200
+----------
+Train Loss: 0.0719 Acc: 0.9693
+Validation Loss: 0.5091 Acc: 0.9242
+
+Epoch 147/200
+----------
+Train Loss: 0.0861 Acc: 0.9628
+Validation Loss: 0.5248 Acc: 0.9091
+
+Epoch 148/200
+----------
+Train Loss: 0.0644 Acc: 0.9693
+Validation Loss: 0.5213 Acc: 0.9167
+
+Epoch 149/200
+----------
+Train Loss: 0.0554 Acc: 0.9709
+Validation Loss: 0.5991 Acc: 0.9091
+
+Epoch 150/200
+----------
+Train Loss: 0.0559 Acc: 0.9757
+Validation Loss: 0.6158 Acc: 0.9015
+
+Epoch 151/200
+----------
+Train Loss: 0.0837 Acc: 0.9660
+Validation Loss: 0.5360 Acc: 0.8864
+
+Epoch 152/200
+----------
+Train Loss: 0.0583 Acc: 0.9725
+Validation Loss: 0.5789 Acc: 0.8788
+
+Epoch 153/200
+----------
+Train Loss: 0.0730 Acc: 0.9741
+Validation Loss: 0.5365 Acc: 0.8864
+
+Epoch 154/200
+----------
+Train Loss: 0.0653 Acc: 0.9693
+Validation Loss: 0.6285 Acc: 0.9015
+
+Epoch 155/200
+----------
+Train Loss: 0.0600 Acc: 0.9757
+Validation Loss: 0.5956 Acc: 0.8712
+
+Epoch 156/200
+----------
+Train Loss: 0.0573 Acc: 0.9725
+Validation Loss: 0.8198 Acc: 0.9015
+
+Epoch 157/200
+----------
+Train Loss: 0.0938 Acc: 0.9628
+Validation Loss: 0.6361 Acc: 0.9015
+
+Epoch 158/200
+----------
+Train Loss: 0.1030 Acc: 0.9515
+Validation Loss: 0.6204 Acc: 0.8939
+
+Epoch 159/200
+----------
+Train Loss: 0.0733 Acc: 0.9676
+Validation Loss: 0.5487 Acc: 0.8864
+
+Epoch 160/200
+----------
+Train Loss: 0.0778 Acc: 0.9693
+Validation Loss: 0.6084 Acc: 0.9015
+
+Epoch 161/200
+----------
+Train Loss: 0.0881 Acc: 0.9595
+Validation Loss: 0.5750 Acc: 0.9015
+
+Epoch 162/200
+----------
+Train Loss: 0.0625 Acc: 0.9838
+Validation Loss: 0.5857 Acc: 0.9015
+
+Epoch 163/200
+----------
+Train Loss: 0.0678 Acc: 0.9725
+Validation Loss: 0.6832 Acc: 0.8864
+
+Epoch 164/200
+----------
+Train Loss: 0.0642 Acc: 0.9676
+Validation Loss: 0.6986 Acc: 0.8864
+
+Epoch 165/200
+----------
+Train Loss: 0.0576 Acc: 0.9725
+Validation Loss: 0.6920 Acc: 0.8864
+
+Epoch 166/200
+----------
+Train Loss: 0.0639 Acc: 0.9806
+Validation Loss: 0.5581 Acc: 0.9015
+
+Epoch 167/200
+----------
+Train Loss: 0.0756 Acc: 0.9709
+Validation Loss: 0.5779 Acc: 0.8788
+
+Epoch 168/200
+----------
+Train Loss: 0.0599 Acc: 0.9773
+Validation Loss: 0.6613 Acc: 0.9015
+
+Epoch 169/200
+----------
+Train Loss: 0.0450 Acc: 0.9822
+Validation Loss: 0.7712 Acc: 0.9091
+
+Epoch 170/200
+----------
+Train Loss: 0.0659 Acc: 0.9709
+Validation Loss: 0.6469 Acc: 0.9091
+
+Epoch 171/200
+----------
+Train Loss: 0.0823 Acc: 0.9676
+Validation Loss: 0.7016 Acc: 0.8864
+
+Epoch 172/200
+----------
+Train Loss: 0.0814 Acc: 0.9660
+Validation Loss: 0.6461 Acc: 0.8864
+
+Epoch 173/200
+----------
+Train Loss: 0.0678 Acc: 0.9741
+Validation Loss: 0.7252 Acc: 0.8788
+
+Epoch 174/200
+----------
+Train Loss: 0.0578 Acc: 0.9709
+Validation Loss: 0.7405 Acc: 0.8864
+
+Epoch 175/200
+----------
+Train Loss: 0.0628 Acc: 0.9790
+Validation Loss: 0.6056 Acc: 0.8788
+
+Epoch 176/200
+----------
+Train Loss: 0.0662 Acc: 0.9709
+Validation Loss: 0.7918 Acc: 0.8864
+
+Epoch 177/200
+----------
+Train Loss: 0.0473 Acc: 0.9838
+Validation Loss: 0.6680 Acc: 0.9015
+
+Epoch 178/200
+----------
+Train Loss: 0.0430 Acc: 0.9871
+Validation Loss: 0.7355 Acc: 0.9015
+
+Epoch 179/200
+----------
+Train Loss: 0.0509 Acc: 0.9790
+Validation Loss: 0.6205 Acc: 0.8636
+
+Epoch 180/200
+----------
+Train Loss: 0.0724 Acc: 0.9741
+Validation Loss: 0.6434 Acc: 0.8561
+
+Epoch 181/200
+----------
+Train Loss: 0.0554 Acc: 0.9757
+Validation Loss: 0.5791 Acc: 0.9091
+
+Epoch 182/200
+----------
+Train Loss: 0.0555 Acc: 0.9773
+Validation Loss: 0.6754 Acc: 0.8788
+
+Epoch 183/200
+----------
+Train Loss: 0.0587 Acc: 0.9725
+Validation Loss: 0.7437 Acc: 0.8864
+
+Epoch 184/200
+----------
+Train Loss: 0.0584 Acc: 0.9757
+Validation Loss: 0.5846 Acc: 0.8788
+
+Epoch 185/200
+----------
+Train Loss: 0.0517 Acc: 0.9806
+Validation Loss: 0.6903 Acc: 0.8864
+
+Epoch 186/200
+----------
+Train Loss: 0.0688 Acc: 0.9676
+Validation Loss: 0.6581 Acc: 0.8788
+
+Epoch 187/200
+----------
+Train Loss: 0.0416 Acc: 0.9838
+Validation Loss: 0.7714 Acc: 0.9015
+
+Epoch 188/200
+----------
+Train Loss: 0.0446 Acc: 0.9790
+Validation Loss: 0.7862 Acc: 0.8939
+
+Epoch 189/200
+----------
+Train Loss: 0.0440 Acc: 0.9838
+Validation Loss: 0.7261 Acc: 0.8864
+
+Epoch 190/200
+----------
+Train Loss: 0.0704 Acc: 0.9725
+Validation Loss: 0.8121 Acc: 0.8939
+
+Epoch 191/200
+----------
+Train Loss: 0.0460 Acc: 0.9806
+Validation Loss: 0.7476 Acc: 0.9167
+
+Epoch 192/200
+----------
+Train Loss: 0.0930 Acc: 0.9644
+Validation Loss: 0.7408 Acc: 0.8939
+
+Epoch 193/200
+----------
+Train Loss: 0.0685 Acc: 0.9725
+Validation Loss: 0.7204 Acc: 0.8712
+
+Epoch 194/200
+----------
+Train Loss: 0.0577 Acc: 0.9741
+Validation Loss: 0.6195 Acc: 0.8636
+
+Epoch 195/200
+----------
+Train Loss: 0.0515 Acc: 0.9806
+Validation Loss: 0.7478 Acc: 0.8788
+
+Epoch 196/200
+----------
+Train Loss: 0.0652 Acc: 0.9693
+Validation Loss: 0.6806 Acc: 0.8712
+
+Epoch 197/200
+----------
+Train Loss: 0.0505 Acc: 0.9757
+Validation Loss: 0.6446 Acc: 0.8864
+
+Epoch 198/200
+----------
+Train Loss: 0.0683 Acc: 0.9725
+Validation Loss: 0.7318 Acc: 0.9091
+
+Epoch 199/200
+----------
+Train Loss: 0.0534 Acc: 0.9790
+Validation Loss: 0.7581 Acc: 0.9015
+
+Epoch 200/200
+----------
+Train Loss: 0.0513 Acc: 0.9757
+Validation Loss: 0.7218 Acc: 0.8864
+
+D:\workspace\pyspace\code\wheat-disease-wavelet-dl\oricnn\train_val_test.py:111: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load('best_model.pth'))
+Test Accuracy: 0.9179
+
+Process finished with exit code 0

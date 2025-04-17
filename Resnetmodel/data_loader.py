@@ -28,7 +28,7 @@ class WheatDiseaseDataset(Dataset):
                     for ext in possible_extensions:
                         img_path = os.path.join(img_dir, processed_img_name_base + ext)
                         if os.path.exists(img_path):
-                            self.img_labels.append((Image.open(img_path).convert("L"), label))  # 使用灰度模式加载原始图像
+                            self.img_labels.append((Image.open(img_path).convert("RGB"), label))  # 使用RGB模式加载原始图像
                             found_image = True
                             break
 

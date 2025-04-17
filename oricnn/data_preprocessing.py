@@ -21,10 +21,13 @@ def match_images_with_labels(image_folder, label_folder):
     for image_file in os.listdir(image_folder):
         file_name_without_ext = os.path.splitext(image_file)[0]
 
+        # 提取原图像名称部分（去除 'processed_' 前缀）
+        original_image_name = file_name_without_ext.replace('processed_', '', 1)
+
         # 检查是否存在对应的标签文件
-        if file_name_without_ext in labels:
-            matched_files[file_name_without_ext] = {
-                'label': labels[file_name_without_ext],
+        if original_image_name in labels:
+            matched_files[original_image_name] = {
+                'label': labels[original_image_name],
                 'image': os.path.join(image_folder, image_file)
             }
 
@@ -77,14 +80,14 @@ def copy_files_to_datasets(dataset, destination_folder):
 
 
 def main():
-    image_folder = r"D:\workspace\data\wheat\grayimg"  # 替换为你的原始图像文件夹的实际路径
+    image_folder = r"F:\wheat\output_RGB\out_processed_images_RGB"  # 替换为你的原始图像文件夹的实际路径
     label_folder = r"D:\workspace\pyspace\code\wheat-disease-wavelet-dl\wheatdata\txt_01"  # 替换为你的标签文件夹的实际路径
 
     matched_files = match_images_with_labels(image_folder, label_folder)
     train_set, val_set, test_set = split_dataset(matched_files)
 
     # 定义目标文件夹
-    output_base_dir = r"F:\wheat\output_original"  # 替换为你希望保存划分后数据集的基础路径
+    output_base_dir = r"F:\wheat\output_threshold_RGB_processed_images"  # 替换为你希望保存划分后数据集的基础路径
     os.makedirs(output_base_dir, exist_ok=True)
 
     # 复制文件到相应的数据集文件夹
