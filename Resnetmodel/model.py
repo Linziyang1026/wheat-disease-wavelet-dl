@@ -8,17 +8,21 @@ class CustomResNet50(nn.Module):
         super(CustomResNet50, self).__init__()
         self.model = models.resnet50(pretrained=True)
 
-        # 添加Dropout层
-        self.dropout = nn.Dropout(0.5)  # 根据需要调整dropout比率
+        # 在ResNet的某些块之后添加Dropout层
+        self.dropout1 = nn.Dropout(0.5)
+        self.dropout2 = nn.Dropout(0.6)
 
         # 替换最后的全连接层
         self.model.fc = nn.Sequential(
-            self.dropout,
-            nn.Linear(self.model.fc.in_features, num_classes)
+            self.dropout1,
+            nn.Linear(self.model.fc.in_features, 256),
+            self.dropout2,
+            nn.Linear(256, num_classes)
         )
 
     def forward(self, x):
-        return self.model(x)
+        x = self.model(x)
+        return x
 
 
 def get_model(num_classes, device):
