@@ -1,28 +1,27 @@
 import os
-import datetime
 import torch
-import torch.optim as optim
+import numpy as np
 from torch.utils.data import DataLoader
-from torchvision import transforms
-from model import get_model
-from data_loader import WheatDiseaseDataset, get_data_loaders
-from sklearn.metrics import accuracy_score
+from torch import nn
+import torch.optim as optim
+import copy
+import datetime
 import matplotlib.pyplot as plt
 
-
 class EarlyStopping:
-    def __init__(self, patience=10, delta=0):
+    def __init__(self, patience=10, delta=0.0005):
         self.patience = patience
         self.delta = delta
         self.best_score = None
         self.early_stop = False
         self.counter = 0
+        self.val_loss_min = np.Inf
 
     def __call__(self, val_loss, model, save_dir):
         score = -val_loss
         if self.best_score is None:
             self.best_score = score
-            self.save_checkpoint(model, save_dir)
+            self.save_checkpoint(val_loss, model, save_dir)
         elif score < self.best_score + self.delta:
             self.counter += 1
             print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
@@ -30,150 +29,153 @@ class EarlyStopping:
                 self.early_stop = True
         else:
             self.best_score = score
-            self.save_checkpoint(model, save_dir)
+            self.save_checkpoint(val_loss, model, save_dir)
             self.counter = 0
 
-    def save_checkpoint(self, model, save_dir):
+    def save_checkpoint(self, val_loss, model, save_dir):
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
         torch.save(model.state_dict(), os.path.join(save_dir, 'best_model.pth'))
+        self.val_loss_min = val_loss
 
-
-def train_model(model, criterion, optimizer, scheduler, early_stopping, train_loader, val_loader, num_epochs=200, device='cuda', train_num=1, save_dir=None):
-    # 生成时间戳
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-
-    # 确保 save_dir 存在
-    if save_dir is not None:
-        os.makedirs(save_dir, exist_ok=True)
-        log_file = os.path.join(save_dir, f'training_log_{timestamp}.txt')
-    else:
-        log_file = f'training_log_{timestamp}.txt'
-
-    with open(log_file, 'w') as file:
-        file.write(f'Training Log - Timestamp: {timestamp}\n')
-
-    best_val_accuracy = 0.0
+def train_model(model, criterion, optimizer, scheduler, early_stopping, train_loader, val_loader, num_epochs, device, train_num, save_dir):
     train_losses = []
     train_accuracies = []
     val_losses = []
     val_accuracies = []
 
+    best_model_wts = copy.deepcopy(model.state_dict())
+    best_acc = 0.0
+
     for epoch in range(num_epochs):
         print(f'Epoch {epoch + 1}/{num_epochs}')
         print('-' * 10)
 
+        # 训练阶段
         model.train()
         running_loss = 0.0
-        all_labels = []
-        all_preds = []
+        running_corrects = 0
         for inputs, labels in train_loader:
-            inputs, labels = inputs.to(device), labels.to(device)
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+
             optimizer.zero_grad()
+
             outputs = model(inputs)
             _, preds = torch.max(outputs, 1)
             loss = criterion(outputs, labels)
+
             loss.backward()
             optimizer.step()
 
             running_loss += loss.item() * inputs.size(0)
-            all_labels.extend(labels.cpu().numpy())
-            all_preds.extend(preds.cpu().numpy())
+            running_corrects += torch.sum(preds == labels.data)
 
         epoch_loss = running_loss / len(train_loader.dataset)
-        epoch_acc = accuracy_score(all_labels, all_preds)
+        epoch_acc = running_corrects.double() / len(train_loader.dataset)
         train_losses.append(epoch_loss)
-        train_accuracies.append(epoch_acc)
+        train_accuracies.append(epoch_acc.cpu().numpy())  # 将张量移动到 CPU 并转换为 NumPy 数组
+
         print(f'Train Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
 
-        val_loss, val_acc = validate_model(model, criterion, val_loader, device)
-        val_losses.append(val_loss)
-        val_accuracies.append(val_acc)
+        # 验证阶段
+        model.eval()
+        running_loss = 0.0
+        running_corrects = 0
+        with torch.no_grad():
+            for inputs, labels in val_loader:
+                inputs = inputs.to(device)
+                labels = labels.to(device)
 
-        # 更新学习率
-        scheduler.step(val_loss)
+                outputs = model(inputs)
+                _, preds = torch.max(outputs, 1)
+                loss = criterion(outputs, labels)
 
-        if val_acc > best_val_accuracy:
-            best_val_accuracy = val_acc
-            torch.save(model.state_dict(), os.path.join(save_dir, 'best_model.pth') if save_dir else 'best_model.pth')
+                running_loss += loss.item() * inputs.size(0)
+                running_corrects += torch.sum(preds == labels.data)
 
-        print(f'Validation Loss: {val_loss:.4f} Acc: {val_acc:.4f}\n')
+        epoch_loss = running_loss / len(val_loader.dataset)
+        epoch_acc = running_corrects.double() / len(val_loader.dataset)
+        val_losses.append(epoch_loss)
+        val_accuracies.append(epoch_acc.cpu().numpy())  # 将张量移动到 CPU 并转换为 NumPy 数组
+
+        print(f'Validation Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
+
+        # 学习率调度
+        scheduler.step(epoch_loss)
 
         # 早停检查
-        early_stopping(val_loss, model, save_dir)
+        early_stopping(epoch_loss, model, save_dir)
         if early_stopping.early_stop:
             print("Early stopping triggered")
             break
 
-    plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, train_num, save_dir=save_dir)
+    # 加载最佳模型权重
+    model.load_state_dict(torch.load(os.path.join(save_dir, 'best_model.pth'), map_location=device))
+    # 绘制训练和验证曲线
+    plot_training_history(train_losses, val_losses, train_accuracies, val_accuracies, save_dir)
 
-
-def validate_model(model, criterion, val_loader, device='cuda'):
+def validate_model(model, criterion, val_loader, device):
     model.eval()
     running_loss = 0.0
-    all_labels = []
-    all_preds = []
+    running_corrects = 0
     with torch.no_grad():
         for inputs, labels in val_loader:
-            inputs, labels = inputs.to(device), labels.to(device)
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+
             outputs = model(inputs)
             _, preds = torch.max(outputs, 1)
             loss = criterion(outputs, labels)
 
             running_loss += loss.item() * inputs.size(0)
-            all_labels.extend(labels.cpu().numpy())
-            all_preds.extend(preds.cpu().numpy())
+            running_corrects += torch.sum(preds == labels.data)
 
     epoch_loss = running_loss / len(val_loader.dataset)
-    epoch_acc = accuracy_score(all_labels, all_preds)
+    epoch_acc = running_corrects.double() / len(val_loader.dataset)
+
+    print(f'Validation Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
     return epoch_loss, epoch_acc
 
-
-def test_model(model, test_loader, device='cuda', save_dir='./results'):
-    model.load_state_dict(torch.load(os.path.join(save_dir, 'best_model.pth'), map_location=device))
+def test_model(model, test_loader, device, save_dir):
     model.eval()
-    all_labels = []
-    all_preds = []
+    running_corrects = 0
     with torch.no_grad():
         for inputs, labels in test_loader:
-            inputs, labels = inputs.to(device), labels.to(device)
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+
             outputs = model(inputs)
             _, preds = torch.max(outputs, 1)
-            all_labels.extend(labels.cpu().numpy())
-            all_preds.extend(preds.cpu().numpy())
 
-    test_acc = accuracy_score(all_labels, all_preds)
+            running_corrects += torch.sum(preds == labels.data)
+
+    test_acc = running_corrects.double() / len(test_loader.dataset)
     print(f'Test Accuracy: {test_acc:.4f}')
 
+    # 保存测试结果
+    with open(os.path.join(save_dir, 'test_results.txt'), 'w') as f:
+        f.write(f'Test Accuracy: {test_acc:.4f}')
 
-def plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, train_num, save_dir=None):
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    epochs = range(1, len(train_losses) + 1)
-
-    plt.figure(figsize=(12, 4))
-
+def plot_training_history(train_losses, val_losses, train_accuracies, val_accuracies, save_dir):
+    plt.figure(figsize=(15, 5))
     plt.subplot(1, 2, 1)
-    plt.plot(epochs, train_losses, 'bo-', label='Training Loss')
-    plt.plot(epochs, val_losses, 'ro-', label='Validation Loss')
-    plt.title('Training and Validation Loss')
+    plt.plot(train_losses, label='Training Loss')
+    plt.plot(val_losses, label='Validation Loss')
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
+    plt.title('Training and Validation Loss')
     plt.legend()
 
     plt.subplot(1, 2, 2)
-    plt.plot(epochs, train_accuracies, 'bo-', label='Training Accuracy')
-    plt.plot(epochs, val_accuracies, 'ro-', label='Validation Accuracy')
-    plt.title('Training and Validation Accuracy')
+    plt.plot(train_accuracies, label='Training Accuracy')
+    plt.plot(val_accuracies, label='Validation Accuracy')
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
+    plt.title('Training and Validation Accuracy')
     plt.legend()
 
     plt.tight_layout()
-
-    if save_dir is not None:
-        os.makedirs(save_dir, exist_ok=True)
-        file_name = os.path.join(save_dir, f'training_plot_{timestamp}.png')
-    else:
-        file_name = f'training_plot_{timestamp}.png'
-
-    plt.savefig(file_name)
-    print(f"Plot saved to {file_name}")
-    plt.close()
+    plot_path = os.path.join(save_dir, 'training_plot_{}.png'.format(datetime.datetime.now().strftime("%Y%m%d_%H%M%S")))
+    plt.savefig(plot_path)
+    print(f"Plot saved to {plot_path}")

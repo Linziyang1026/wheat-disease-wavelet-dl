@@ -37,21 +37,20 @@ def main(train_num):
 
     # 损失函数和优化器
     criterion = torch.nn.CrossEntropyLoss()
-    # 使用AdamW优化器
-    optimizer = optim.AdamW(model.parameters(), lr=0.0001, weight_decay=1e-3)
+    # 使用更小的学习率和更强的正则化
+    optimizer = optim.AdamW(model.parameters(), lr=1e-5, weight_decay=1e-1)
     # 添加学习率调度器
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=5)
+    scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200, eta_min=1e-6)
 
-    # 初始化早停
-    early_stopping = EarlyStopping(patience=10, delta=0.001)
-
+    # 初始化更严格的早停
+    early_stopping = EarlyStopping(patience=20, delta=0.0005)
 
     # 模型训练和评估
     train_model(model=model, criterion=criterion, optimizer=optimizer, scheduler=scheduler,
                 early_stopping=early_stopping, train_loader=train_loader, val_loader=val_loader, num_epochs=200,
                 device=device, train_num=train_num, save_dir=save_dir)
 
-    # 使用相同的save_dir测试模型
+    # 使用相同的 save_dir 测试模型
     test_model(model=model, test_loader=test_loader, device=device, save_dir=save_dir)
 
 

@@ -1,12 +1,12 @@
 import torch
 import torch.nn as nn
 import torchvision.models as models
-from torchvision.models import resnet50, ResNet50_Weights
+from torchvision.models import resnet18, ResNet18_Weights
 
-class CustomResNet50(nn.Module):
+class CustomResNet18(nn.Module):
     def __init__(self, num_classes):
-        super(CustomResNet50, self).__init__()
-        self.model = resnet50(weights=ResNet50_Weights.DEFAULT)
+        super(CustomResNet18, self).__init__()
+        self.model = resnet18(weights=ResNet18_Weights.DEFAULT)
 
         # 冻结前面的层
         for param in self.model.parameters():
@@ -24,6 +24,7 @@ class CustomResNet50(nn.Module):
         self.model.fc = nn.Sequential(
             self.dropout1,
             nn.Linear(self.model.fc.in_features, 256),
+            nn.ReLU(),
             self.dropout2,
             nn.Linear(256, num_classes)
         )
@@ -34,6 +35,6 @@ class CustomResNet50(nn.Module):
 
 
 def get_model(num_classes, device):
-    model = CustomResNet50(num_classes=num_classes)
+    model = CustomResNet18(num_classes=num_classes)
     model.to(device)
     return model
