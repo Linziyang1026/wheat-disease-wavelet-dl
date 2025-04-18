@@ -3,9 +3,10 @@ import datetime
 import sys
 import torch
 import torch.optim as optim
-from train_val_test import train_model, validate_model, test_model
+from train_val_test import train_model, validate_model, test_model, EarlyStopping
 from model import get_model
 from data_loader import get_data_loaders
+
 
 def main(train_num):
     # 设备配置
@@ -36,18 +37,23 @@ def main(train_num):
 
     # 损失函数和优化器
     criterion = torch.nn.CrossEntropyLoss()
-    # 使用Adam优化器
-    optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-4)
+    # 使用AdamW优化器
+    optimizer = optim.AdamW(model.parameters(), lr=0.0001, weight_decay=1e-3)
     # 添加学习率调度器
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=10)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=5)
+
+    # 初始化早停
+    early_stopping = EarlyStopping(patience=10, delta=0.001)
+
 
     # 模型训练和评估
     train_model(model=model, criterion=criterion, optimizer=optimizer, scheduler=scheduler,
-                train_loader=train_loader, val_loader=val_loader, num_epochs=200,
+                early_stopping=early_stopping, train_loader=train_loader, val_loader=val_loader, num_epochs=200,
                 device=device, train_num=train_num, save_dir=save_dir)
 
     # 使用相同的save_dir测试模型
     test_model(model=model, test_loader=test_loader, device=device, save_dir=save_dir)
+
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

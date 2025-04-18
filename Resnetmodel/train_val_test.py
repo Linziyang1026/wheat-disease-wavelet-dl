@@ -10,8 +10,34 @@ from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 
 
-def train_model(model, criterion, optimizer, scheduler, train_loader, val_loader, num_epochs=200, device='cuda',
-                train_num=1, save_dir=None):
+class EarlyStopping:
+    def __init__(self, patience=10, delta=0):
+        self.patience = patience
+        self.delta = delta
+        self.best_score = None
+        self.early_stop = False
+        self.counter = 0
+
+    def __call__(self, val_loss, model, save_dir):
+        score = -val_loss
+        if self.best_score is None:
+            self.best_score = score
+            self.save_checkpoint(model, save_dir)
+        elif score < self.best_score + self.delta:
+            self.counter += 1
+            print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
+            if self.counter >= self.patience:
+                self.early_stop = True
+        else:
+            self.best_score = score
+            self.save_checkpoint(model, save_dir)
+            self.counter = 0
+
+    def save_checkpoint(self, model, save_dir):
+        torch.save(model.state_dict(), os.path.join(save_dir, 'best_model.pth'))
+
+
+def train_model(model, criterion, optimizer, scheduler, early_stopping, train_loader, val_loader, num_epochs=200, device='cuda', train_num=1, save_dir=None):
     # 生成时间戳
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
@@ -70,6 +96,12 @@ def train_model(model, criterion, optimizer, scheduler, train_loader, val_loader
             torch.save(model.state_dict(), os.path.join(save_dir, 'best_model.pth') if save_dir else 'best_model.pth')
 
         print(f'Validation Loss: {val_loss:.4f} Acc: {val_acc:.4f}\n')
+
+        # 早停检查
+        early_stopping(val_loss, model, save_dir)
+        if early_stopping.early_stop:
+            print("Early stopping triggered")
+            break
 
     plot_curves(train_losses, train_accuracies, val_losses, val_accuracies, train_num, save_dir=save_dir)
 
