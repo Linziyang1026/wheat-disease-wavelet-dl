@@ -8,7 +8,7 @@ import numpy as np
 from config import Config
 
 class Cutout(object):
-    """Randomly mask out one or more patches from an image."""
+    
     def __init__(self, n_holes=1, length=16):
         self.n_holes = n_holes
         self.length = length
