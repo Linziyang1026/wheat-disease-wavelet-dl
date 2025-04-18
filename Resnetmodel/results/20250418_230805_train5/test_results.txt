@@ -1,1 +1,250 @@
+D:\development\tool\Anaconda\envs\wheat-disease-wavelet-dl\python.exe D:\workspace\pyspace\code\wheat-disease-wavelet-dl\Resnetmodel\main.py
+Using default training number as no argument provided.
+Epoch 1/200
+ Train  Loss: 0.8525 Acc: 0.4547
+ Val    Loss: 0.6496 Acc: 0.7197
+Epoch 2/200
+ Train  Loss: 0.7378 Acc: 0.5631
+ Val    Loss: 0.6320 Acc: 0.6591
+Epoch 3/200
+ Train  Loss: 0.6464 Acc: 0.6472
+ Val    Loss: 0.5939 Acc: 0.7424
+Epoch 4/200
+ Train  Loss: 0.5199 Acc: 0.7864
+ Val    Loss: 0.5633 Acc: 0.8106
+Epoch 5/200
+ Train  Loss: 0.4284 Acc: 0.8463
+ Val    Loss: 0.4804 Acc: 0.8712
+Epoch 6/200
+ Train  Loss: 0.3702 Acc: 0.9159
+ Val    Loss: 0.4207 Acc: 0.9167
+Epoch 7/200
+ Train  Loss: 0.3278 Acc: 0.9304
+ Val    Loss: 0.4202 Acc: 0.9091
+Epoch 8/200
+ Train  Loss: 0.2815 Acc: 0.9450
+ Val    Loss: 0.3598 Acc: 0.9394
+Epoch 9/200
+ Train  Loss: 0.2461 Acc: 0.9628
+ Val    Loss: 0.3413 Acc: 0.9470
+Epoch 10/200
+ Train  Loss: 0.2434 Acc: 0.9531
+ Val    Loss: 0.3431 Acc: 0.9470
+EarlyStopping counter: 1/10
+Epoch 11/200
+ Train  Loss: 0.1948 Acc: 0.9693
+ Val    Loss: 0.3381 Acc: 0.9470
+Epoch 12/200
+ Train  Loss: 0.1668 Acc: 0.9773
+ Val    Loss: 0.3449 Acc: 0.9318
+EarlyStopping counter: 1/10
+Epoch 13/200
+ Train  Loss: 0.1652 Acc: 0.9757
+ Val    Loss: 0.2653 Acc: 0.9621
+Epoch 14/200
+ Train  Loss: 0.1385 Acc: 0.9790
+ Val    Loss: 0.2251 Acc: 0.9697
+Epoch 15/200
+ Train  Loss: 0.1398 Acc: 0.9757
+ Val    Loss: 0.2127 Acc: 0.9697
+Epoch 16/200
+ Train  Loss: 0.1381 Acc: 0.9773
+ Val    Loss: 0.2145 Acc: 0.9545
+EarlyStopping counter: 1/10
+Epoch 17/200
+ Train  Loss: 0.1155 Acc: 0.9871
+ Val    Loss: 0.2005 Acc: 0.9621
+Epoch 18/200
+ Train  Loss: 0.0995 Acc: 0.9935
+ Val    Loss: 0.1937 Acc: 0.9621
+Epoch 19/200
+ Train  Loss: 0.0940 Acc: 0.9871
+ Val    Loss: 0.1937 Acc: 0.9697
+EarlyStopping counter: 1/10
+Epoch 20/200
+ Train  Loss: 0.1242 Acc: 0.9790
+ Val    Loss: 0.1782 Acc: 0.9848
+Epoch 21/200
+ Train  Loss: 0.0945 Acc: 0.9919
+ Val    Loss: 0.1724 Acc: 0.9697
+Epoch 22/200
+ Train  Loss: 0.0834 Acc: 0.9903
+ Val    Loss: 0.1605 Acc: 0.9773
+Epoch 23/200
+ Train  Loss: 0.0768 Acc: 0.9951
+ Val    Loss: 0.1579 Acc: 0.9773
+Epoch 24/200
+ Train  Loss: 0.0751 Acc: 0.9935
+ Val    Loss: 0.1793 Acc: 0.9621
+EarlyStopping counter: 1/10
+Epoch 25/200
+ Train  Loss: 0.0904 Acc: 0.9838
+ Val    Loss: 0.1705 Acc: 0.9545
+EarlyStopping counter: 2/10
+Epoch 26/200
+ Train  Loss: 0.0671 Acc: 0.9951
+ Val    Loss: 0.1993 Acc: 0.9545
+EarlyStopping counter: 3/10
+Epoch 27/200
+ Train  Loss: 0.0759 Acc: 0.9871
+ Val    Loss: 0.1714 Acc: 0.9470
+EarlyStopping counter: 4/10
+Epoch 28/200
+ Train  Loss: 0.0717 Acc: 0.9887
+ Val    Loss: 0.1696 Acc: 0.9621
+EarlyStopping counter: 5/10
+Epoch 29/200
+ Train  Loss: 0.0959 Acc: 0.9790
+ Val    Loss: 0.1567 Acc: 0.9697
+Epoch 30/200
+ Train  Loss: 0.0536 Acc: 0.9984
+ Val    Loss: 0.1602 Acc: 0.9697
+EarlyStopping counter: 1/10
+Epoch 31/200
+ Train  Loss: 0.0747 Acc: 0.9871
+ Val    Loss: 0.1515 Acc: 0.9697
+Epoch 32/200
+ Train  Loss: 0.0682 Acc: 0.9919
+ Val    Loss: 0.1557 Acc: 0.9773
+EarlyStopping counter: 1/10
+Epoch 33/200
+ Train  Loss: 0.0461 Acc: 0.9984
+ Val    Loss: 0.1333 Acc: 0.9773
+Epoch 34/200
+ Train  Loss: 0.0586 Acc: 0.9903
+ Val    Loss: 0.1380 Acc: 0.9697
+EarlyStopping counter: 1/10
+Epoch 35/200
+ Train  Loss: 0.0485 Acc: 0.9968
+ Val    Loss: 0.1407 Acc: 0.9773
+EarlyStopping counter: 2/10
+Epoch 36/200
+ Train  Loss: 0.0475 Acc: 0.9968
+ Val    Loss: 0.1356 Acc: 0.9773
+EarlyStopping counter: 3/10
+Epoch 37/200
+ Train  Loss: 0.0374 Acc: 1.0000
+ Val    Loss: 0.1346 Acc: 0.9697
+EarlyStopping counter: 4/10
+Epoch 38/200
+ Train  Loss: 0.0423 Acc: 0.9968
+ Val    Loss: 0.1272 Acc: 0.9697
+Epoch 39/200
+ Train  Loss: 0.0632 Acc: 0.9935
+ Val    Loss: 0.1614 Acc: 0.9621
+EarlyStopping counter: 1/10
+Epoch 40/200
+ Train  Loss: 0.0432 Acc: 0.9984
+ Val    Loss: 0.1588 Acc: 0.9621
+EarlyStopping counter: 2/10
+Epoch 41/200
+ Train  Loss: 0.0464 Acc: 0.9935
+ Val    Loss: 0.1370 Acc: 0.9697
+EarlyStopping counter: 3/10
+Epoch 42/200
+ Train  Loss: 0.0330 Acc: 1.0000
+ Val    Loss: 0.1237 Acc: 0.9773
+Epoch 43/200
+ Train  Loss: 0.0305 Acc: 1.0000
+ Val    Loss: 0.1216 Acc: 0.9773
+Epoch 44/200
+ Train  Loss: 0.0372 Acc: 0.9968
+ Val    Loss: 0.1260 Acc: 0.9697
+EarlyStopping counter: 1/10
+Epoch 45/200
+ Train  Loss: 0.0371 Acc: 0.9984
+ Val    Loss: 0.1295 Acc: 0.9621
+EarlyStopping counter: 2/10
+Epoch 46/200
+ Train  Loss: 0.0436 Acc: 0.9951
+ Val    Loss: 0.1374 Acc: 0.9621
+EarlyStopping counter: 3/10
+Epoch 47/200
+ Train  Loss: 0.0613 Acc: 0.9854
+ Val    Loss: 0.1648 Acc: 0.9621
+EarlyStopping counter: 4/10
+Epoch 48/200
+ Train  Loss: 0.0344 Acc: 0.9984
+ Val    Loss: 0.1556 Acc: 0.9621
+EarlyStopping counter: 5/10
+Epoch 49/200
+ Train  Loss: 0.0338 Acc: 0.9968
+ Val    Loss: 0.1361 Acc: 0.9621
+EarlyStopping counter: 6/10
+Epoch 50/200
+ Train  Loss: 0.0485 Acc: 0.9935
+ Val    Loss: 0.1165 Acc: 0.9773
+Epoch 51/200
+ Train  Loss: 0.0377 Acc: 0.9951
+ Val    Loss: 0.1250 Acc: 0.9697
+EarlyStopping counter: 1/10
+Epoch 52/200
+ Train  Loss: 0.0337 Acc: 0.9935
+ Val    Loss: 0.1249 Acc: 0.9697
+EarlyStopping counter: 2/10
+Epoch 53/200
+ Train  Loss: 0.0250 Acc: 0.9984
+ Val    Loss: 0.1334 Acc: 0.9697
+EarlyStopping counter: 3/10
+Epoch 54/200
+ Train  Loss: 0.0235 Acc: 1.0000
+ Val    Loss: 0.1351 Acc: 0.9697
+EarlyStopping counter: 4/10
+Epoch 55/200
+ Train  Loss: 0.0231 Acc: 1.0000
+ Val    Loss: 0.1365 Acc: 0.9697
+EarlyStopping counter: 5/10
+Epoch 56/200
+ Train  Loss: 0.0269 Acc: 0.9984
+ Val    Loss: 0.1237 Acc: 0.9697
+EarlyStopping counter: 6/10
+Epoch 57/200
+ Train  Loss: 0.0279 Acc: 0.9968
+ Val    Loss: 0.1145 Acc: 0.9697
+Epoch 58/200
+ Train  Loss: 0.0311 Acc: 0.9968
+ Val    Loss: 0.1188 Acc: 0.9697
+EarlyStopping counter: 1/10
+Epoch 59/200
+ Train  Loss: 0.0281 Acc: 0.9951
+ Val    Loss: 0.1300 Acc: 0.9697
+EarlyStopping counter: 2/10
+Epoch 60/200
+ Train  Loss: 0.0263 Acc: 0.9951
+ Val    Loss: 0.1265 Acc: 0.9697
+EarlyStopping counter: 3/10
+Epoch 61/200
+ Train  Loss: 0.0216 Acc: 1.0000
+ Val    Loss: 0.1166 Acc: 0.9697
+EarlyStopping counter: 4/10
+Epoch 62/200
+ Train  Loss: 0.0219 Acc: 1.0000
+ Val    Loss: 0.1184 Acc: 0.9697
+EarlyStopping counter: 5/10
+Epoch 63/200
+ Train  Loss: 0.0218 Acc: 1.0000
+ Val    Loss: 0.1179 Acc: 0.9697
+EarlyStopping counter: 6/10
+Epoch 64/200
+ Train  Loss: 0.0198 Acc: 1.0000
+ Val    Loss: 0.1245 Acc: 0.9697
+EarlyStopping counter: 7/10
+Epoch 65/200
+ Train  Loss: 0.0259 Acc: 0.9935
+ Val    Loss: 0.1270 Acc: 0.9697
+EarlyStopping counter: 8/10
+Epoch 66/200
+ Train  Loss: 0.0192 Acc: 1.0000
+ Val    Loss: 0.1235 Acc: 0.9621
+EarlyStopping counter: 9/10
+Epoch 67/200
+ Train  Loss: 0.0195 Acc: 0.9984
+ Val    Loss: 0.1234 Acc: 0.9697
+EarlyStopping counter: 10/10
+Early stopping triggered
+D:\workspace\pyspace\code\wheat-disease-wavelet-dl\Resnetmodel\train_val_test.py:91: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model.load_state_dict(torch.load(best_path, map_location=device))
+Plot saved to D:\workspace\pyspace\code\wheat-disease-wavelet-dl\Resnetmodel\results\20250418_230805_train5\history_20250418_231821.png
 Test Accuracy: 0.9851
+
+Process finished with exit code 0
