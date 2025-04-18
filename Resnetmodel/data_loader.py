@@ -5,6 +5,7 @@ import torchvision.transforms as transforms
 import torchvision.transforms.functional as TF
 from PIL import Image
 import numpy as np
+from config import Config
 
 class Cutout(object):
     """Randomly mask out one or more patches from an image."""
@@ -93,8 +94,8 @@ class WheatDiseaseDataset(Dataset):
                         img_path = os.path.join(img_dir, processed_img_name_base + ext)
                         if os.path.exists(img_path):
                             img = Image.open(img_path).convert("RGB")
-                            self.img_labels.append((img.copy(), label))  
-                            img.close()  
+                            self.img_labels.append((img.copy(), label))
+                            img.close()
                             found_image = True
                             break
 
@@ -112,8 +113,10 @@ class WheatDiseaseDataset(Dataset):
     def __len__(self):
         return len(self.img_labels)
 
-def get_data_loaders(train_img_dir, train_label_dir, val_img_dir, val_label_dir, test_img_dir, test_label_dir,
-                     batch_size=16):
+def get_data_loaders(train_img_dir=Config.train_img_dir, train_label_dir=Config.train_label_dir,
+                     val_img_dir=Config.val_img_dir, val_label_dir=Config.val_label_dir,
+                     test_img_dir=Config.test_img_dir, test_label_dir=Config.test_label_dir,
+                     batch_size=Config.batch_size):
     transform_train = transforms.Compose([
         transforms.RandomHorizontalFlip(),
         transforms.RandomVerticalFlip(),
